@@ -9,7 +9,7 @@
 ║   EMAIL:      towafohtung1@gmail.com                         ║
 ║   PHONE:      +237 683009211                                 ║
 ║   DATE:       2026                                           ║
-║   VERSION:    3.0 (With Product Popups)                      ║
+║   VERSION:    4.0 (With Gallery)                             ║
 ║                                                               ║
 ╚═══════════════════════════════════════════════════════════════╝
 -->
@@ -76,6 +76,69 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-left: 8px;
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery-section {
+            padding: 60px 0;
+            background: #fafaf8;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1 / 1;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: #e8f5e9;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 2px dashed #81c784;
+            border-radius: 12px;
+        }
+
+        .gallery-placeholder i {
+            font-size: 32px;
+            margin-bottom: 8px;
+            opacity: 0.5;
+        }
+
+        .gallery-placeholder span {
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+
+        .gallery-note {
+            text-align: center;
+            margin-top: 24px;
+            padding: 12px;
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .gallery-note i {
+            color: #f57c00;
+            margin-right: 6px;
         }
 
         /* ===== PRODUCT MODAL ===== */
@@ -220,7 +283,6 @@
             margin-right: 8px;
         }
 
-        /* ===== MODAL ANIMATIONS ===== */
         @keyframes slideUp {
             from {
                 opacity: 0;
@@ -239,7 +301,7 @@
                 height: 70px;
             }
             .product-modal-img-wrapper {
-                height: 250px;
+                height: 220px;
             }
             .product-modal-body {
                 padding: 18px 20px 22px;
@@ -247,11 +309,21 @@
             .product-modal-body h2 {
                 font-size: 1.2rem;
             }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .gallery-placeholder i {
+                font-size: 24px;
+            }
+            .gallery-placeholder span {
+                font-size: 0.65rem;
+            }
         }
 
         @media (max-width: 480px) {
             .product-modal-img-wrapper {
-                height: 200px;
+                height: 180px;
             }
             .product-modal-body {
                 padding: 14px 16px 18px;
@@ -262,6 +334,16 @@
             .product-modal-body p {
                 font-size: 0.85rem;
             }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .gallery-placeholder i {
+                font-size: 20px;
+            }
+            .gallery-placeholder span {
+                font-size: 0.55rem;
+            }
         }
     </style>
 </head>
@@ -269,18 +351,20 @@
 
     <!-- ===== NAVIGATION ===== -->
     <nav class="navbar">
-    <div class="container nav-container">
-        <div class="logo">
-            <img src="assets/images/greencity-foods-logo.png" alt="GreenCity Foods Logo" style="height: 100px; width: auto; max-width: 280px; object-fit: contain;" />
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="assets/images/greencity-foods-logo.png" alt="GreenCity Foods Logo" style="height: 70px; width: auto; max-width: 220px; object-fit: contain;" />
+            </div>
+            <ul class="nav-links">
+                <li><a href="#products"><i class="fas fa-box"></i> Products</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="#gallery"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <a href="https://wa.me/237XXXXXXXXX?text=Hello%20GreenCity%20Foods%20–%20I%20want%20to%20place%20an%20order" 
+               target="_blank" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
         </div>
-        <ul class="nav-links">
-            <li><a href="#products"><i class="fas fa-box"></i> Products</a></li>
-            <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
-            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
-        </ul>
-        <a href="https://wa.me/237XXXXXXXXX?text=Hello%20GreenCity%20Foods%20–%20I%20want%20to%20place%20an%20order" target="_blank" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
-    </div>
-</nav>
+    </nav>
 
     <!-- ===== HERO ===== -->
     <section class="hero">
@@ -495,11 +579,63 @@
                         <li><i class="fas fa-check-circle" style="color:#2e7d32;"></i> Custom processing for bulk orders</li>
                     </ul>
                     <a href="https://wa.me/237XXXXXXXXX?text=Hello%20–%20I%20want%20to%20know%20more%20about%20GreenCity%20Foods" 
-                    target="_blank" class="btn btn-primary" style="display: inline-block; max-width: 220px; text-align: center;"><i class="fab fa-whatsapp"></i> Inquire Now</a>
+                       target="_blank" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Inquire Now</a>
                 </div>
                 <div class="about-image">
                     <img src="assets/images/about-food-processing.jpg" alt="Food Processing" class="about-img" />
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY SECTION ===== -->
+    <section id="gallery" class="gallery-section">
+        <div class="container" style="max-width:1200px; margin:0 auto; padding:0 20px;">
+            <div class="section-title animate-on-scroll">
+                <span class="badge"><i class="fas fa-images"></i> Gallery</span>
+                <h2>Food <span class="highlight">Moments</span></h2>
+                <p>Capturing our food processing, events, and community impact</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <span>Add Photo</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <span>Add Photo</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <span>Add Photo</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <span>Add Photo</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <span>Add Photo</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <span>Add Photo</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-note">
+                <p><i class="fas fa-info-circle"></i> Photos coming soon – check back for updates!</p>
             </div>
         </div>
     </section>
@@ -586,28 +722,19 @@
                 <p>&copy; 2026 GreenCity Foods – A Division of GreenCity Enterprises</p>
                 <p><i class="fas fa-seedling" style="color:#81c784;"></i> Sustainably Processed in Cameroon</p>
             </div>
-           <div class="footer-logos" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 15px; align-items: center;">
-                <!-- GreenCity Enterprises Logo -->
-                <img src="assets/images/greencity-enterprises-logo.png" alt="GreenCity Enterprises" style="height: 70px; object-fit: contain;">
-                
-                <!-- GreenCity Briquette Logo -->
-                <img src="assets/images/greencity-briquette-logo.png" alt="GreenCity Briquette" style="height: 70px; object-fit: contain;">
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 15px; align-items: center;">
+                <img src="assets/images/greencity-enterprises-logo.png" alt="GreenCity Enterprises" style="height: 50px; object-fit: contain; opacity: 0.8;">
+                <img src="assets/images/greencity-foods-logo.png" alt="GreenCity Foods" style="height: 50px; object-fit: contain; opacity: 0.8;">
+                <img src="assets/images/greencity-briquette-logo.png" alt="GreenCity Briquettes" style="height: 50px; object-fit: contain; opacity: 0.8;">
             </div>
             <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06);">
                 <p style="font-size:0.7rem; color:rgba(255,255,255,0.25);">
                     Crafted with <span style="color:#e74c3c;"><i class="fas fa-heart"></i></span> by 
-                    <a href="#" target="_blank" 
-                       style="color:#f57c00; text-decoration:none; font-weight:600;">
-                       TMF
-                    </a>
+                    <a href="#" target="_blank" style="color:#f57c00; text-decoration:none; font-weight:600;">TMF</a>
                     <span style="color:rgba(255,255,255,0.1); margin:0 6px;">•</span>
-                    <span style="color:rgba(255,255,255,0.15); font-size:0.65rem;">
-                        Towa Munwu Fohtung
-                    </span>
+                    <span style="color:rgba(255,255,255,0.15); font-size:0.65rem;">Towa Munwu Fohtung</span>
                     <span style="color:rgba(255,255,255,0.08); margin:0 6px;">|</span>
-                    <span style="color:rgba(255,255,255,0.12); font-size:0.6rem; font-style:italic;">
-                        Think. Make. Flow.
-                    </span>
+                    <span style="color:rgba(255,255,255,0.12); font-size:0.6rem; font-style:italic;">Think. Make. Flow.</span>
                 </p>
             </div>
         </div>
@@ -622,7 +749,6 @@
             document.getElementById('modalProductDescription').textContent = description;
             document.getElementById('modalProductCategory').textContent = category || 'Product';
             
-            // Set features
             var featuresContainer = document.getElementById('modalProductFeatures');
             featuresContainer.innerHTML = '';
             if (features && Array.isArray(features)) {
@@ -633,11 +759,9 @@
                 });
             }
             
-            // Set WhatsApp link
             var waLink = document.getElementById('modalWhatsAppLink');
             waLink.href = 'https://wa.me/237XXXXXXXXX?text=Hello%20–%20I%20want%20to%20order%20' + encodeURIComponent(name);
             
-            // Show modal
             document.getElementById('productModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -648,7 +772,7 @@
             document.body.style.overflow = 'auto';
         }
 
-        // ===== CLICK EVENTS FOR ALL PRODUCT CARDS =====
+        // ===== CLICK EVENTS =====
         document.addEventListener('DOMContentLoaded', function() {
             var cards = document.querySelectorAll('.product-card');
             cards.forEach(function(card) {
@@ -667,14 +791,14 @@
             });
         });
 
-        // ===== CLOSE MODAL ON CLICK OUTSIDE =====
+        // ===== CLOSE ON CLICK OUTSIDE =====
         document.getElementById('productModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeProductModal();
             }
         });
 
-        // ===== CLOSE MODAL ON ESC KEY =====
+        // ===== CLOSE ON ESC =====
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeProductModal();
