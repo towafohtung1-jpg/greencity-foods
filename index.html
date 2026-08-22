@@ -9,7 +9,7 @@
 ║   EMAIL:      towafohtung1@gmail.com                         ║
 ║   PHONE:      +237 683009211                                 ║
 ║   DATE:       2026                                           ║
-║   VERSION:    2.0 (With Local Images)                        ║
+║   VERSION:    3.0 (With Product Popups)                      ║
 ║                                                               ║
 ╚═══════════════════════════════════════════════════════════════╝
 -->
@@ -43,12 +43,17 @@
             display: block;
             border: 3px solid #e8f5e9;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .product-img:hover {
             transform: scale(1.08);
             border-color: #f57c00;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-card {
+            cursor: pointer;
         }
 
         /* ===== ABOUT IMAGE ===== */
@@ -59,11 +64,203 @@
             object-fit: cover;
         }
 
+        /* ===== COMING SOON BADGE ===== */
+        .coming-soon-badge {
+            display: inline-block;
+            background: #f57c00;
+            color: #fff;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 8px;
+        }
+
+        /* ===== PRODUCT MODAL ===== */
+        .product-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+        }
+
+        .product-modal.active {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-modal-content {
+            background: #fff;
+            border-radius: 20px;
+            max-width: 550px;
+            width: 92%;
+            max-height: 92vh;
+            overflow-y: auto;
+            padding: 0;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        .product-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-modal-close:hover {
+            background: rgba(0, 0, 0, 0.7);
+            color: #f57c00;
+        }
+
+        .product-modal-img-wrapper {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            border-radius: 20px 20px 0 0;
+            background: #f5f5f0;
+        }
+
+        .product-modal-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #fafaf8;
+            padding: 10px;
+        }
+
+        .product-modal-body {
+            padding: 24px 28px 28px;
+        }
+
+        .product-modal-body h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #1e2a1e;
+        }
+
+        .product-modal-body .category-tag {
+            display: inline-block;
+            background: rgba(46, 125, 50, 0.1);
+            color: #2e7d32;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .product-modal-body p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .product-modal-body .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0 16px;
+        }
+
+        .product-modal-body .features span {
+            background: #f5f5f0;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .product-modal-body .btn-wa-modal {
+            display: block;
+            background: #25D366;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .product-modal-body .btn-wa-modal:hover {
+            background: #128C7E;
+            transform: scale(1.02);
+        }
+
+        .product-modal-body .btn-wa-modal i {
+            margin-right: 8px;
+        }
+
+        /* ===== MODAL ANIMATIONS ===== */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .product-img {
                 width: 70px;
                 height: 70px;
+            }
+            .product-modal-img-wrapper {
+                height: 250px;
+            }
+            .product-modal-body {
+                padding: 18px 20px 22px;
+            }
+            .product-modal-body h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-modal-img-wrapper {
+                height: 200px;
+            }
+            .product-modal-body {
+                padding: 14px 16px 18px;
+            }
+            .product-modal-body h2 {
+                font-size: 1rem;
+            }
+            .product-modal-body p {
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -74,7 +271,8 @@
     <nav class="navbar">
         <div class="container nav-container">
             <div class="logo">
-                <img src="../../assets/images/greencity-foods-logo.png" alt="GreenCity Foods Logo" style="height: 70px; max-width: 100%; object-fit: contain;">
+                <span class="logo-icon"><i class="fas fa-seedling" style="color:#2e7d32;"></i></span>
+                <span>GreenCity <span class="highlight">Foods</span></span>
             </div>
             <ul class="nav-links">
                 <li><a href="#products"><i class="fas fa-box"></i> Products</a></li>
@@ -113,25 +311,25 @@
             <div class="category-block">
                 <div class="category-header">
                     <span class="category-icon"><i class="fas fa-snowflake" style="color:#2196F3;"></i></span>
-                    <h3>Freeze-Dried Foods</h3>
+                    <h3>Freeze-Dried Foods <span class="coming-soon-badge">Coming Soon</span></h3>
                     <a href="https://wa.me/237XXXXXXXXX?text=Hello%20–%20I%20want%20to%20order%20Freeze-Dried%20products" 
                        target="_blank" class="btn-small-wa"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
                 </div>
                 <div class="product-grid">
-                    <div class="product-card">
+                    <div class="product-card" style="opacity:0.7;" data-name="Freeze-Dried Fruits" data-image="assets/images/freeze-dried-fruits.jpg" data-description="Premium freeze-dried fruits preserved at peak freshness. Retains all nutrients and natural flavor. Shelf life of 10+ years." data-features='["Shelf Life: 10+ Years", "100% Natural", "No Additives", "Nutrients Intact"]'>
                         <img src="assets/images/freeze-dried-fruits.jpg" alt="Freeze-Dried Fruits" class="product-img" />
                         <h4>Freeze-Dried Fruits</h4>
-                        <p>Mangoes, bananas, pineapples &amp; more</p>
+                        <p>Coming Soon</p>
                     </div>
-                    <div class="product-card">
+                    <div class="product-card" style="opacity:0.7;" data-name="Freeze-Dried Vegetables" data-image="assets/images/freeze-dried-vegetables.jpg" data-description="Premium freeze-dried vegetables preserved at peak freshness. Retains all nutrients and natural flavor. Shelf life of 10+ years." data-features='["Shelf Life: 10+ Years", "100% Natural", "No Additives", "Nutrients Intact"]'>
                         <img src="assets/images/freeze-dried-vegetables.jpg" alt="Freeze-Dried Vegetables" class="product-img" />
                         <h4>Freeze-Dried Vegetables</h4>
-                        <p>Broccoli, carrots, green beans</p>
+                        <p>Coming Soon</p>
                     </div>
-                    <div class="product-card">
+                    <div class="product-card" style="opacity:0.7;" data-name="Freeze-Dried Flowers" data-image="assets/images/freeze-dried-flowers.jpg" data-description="Premium freeze-dried edible flowers for gourmet decoration. Preserves natural beauty and color." data-features='["Shelf Life: 10+ Years", "100% Natural", "No Additives", "Edible Flowers"]'>
                         <img src="assets/images/freeze-dried-flowers.jpg" alt="Freeze-Dried Flowers" class="product-img" />
                         <h4>Freeze-Dried Flowers</h4>
-                        <p>Edible flowers for gourmet decoration</p>
+                        <p>Coming Soon</p>
                     </div>
                 </div>
             </div>
@@ -145,58 +343,114 @@
                        target="_blank" class="btn-small-wa"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
                 </div>
                 <div class="product-grid">
-                    <div class="product-card">
-                        <img src="assets/images/cassava-flour.jpg" alt="Cassava Flour" class="product-img" />
-                        <h4>Cassava Flour</h4>
-                        <p>Dry fufu / cassava flour</p>
+                    <div class="product-card" data-name="Red Corn (Fufu Corn)" data-image="assets/images/red-corn-fufu.jpg" data-description="Premium red corn specially processed for fufu. Rich in nutrients and natural flavor." data-features='["100% Natural", "Gluten Free", "High Fibre", "Non GMO"]'>
+                        <img src="assets/images/red-corn-fufu.jpg" alt="Red Corn Fufu" class="product-img" />
+                        <h4>Red Corn (Fufu Corn)</h4>
+                        <p>Premium red corn for fufu</p>
                     </div>
-                    <div class="product-card">
-                        <img src="assets/images/fufu-corn-flour.jpg" alt="Corn Flour" class="product-img" />
-                        <h4>Fufu Corn Flour</h4>
-                        <p>Premium corn flour for fufu</p>
+                    <div class="product-card" data-name="White Corn (Fufu Corn)" data-image="assets/images/white-corn-fufu.jpg" data-description="Premium white corn specially processed for fufu. Naturally gluten-free and high in fibre." data-features='["100% Natural", "Gluten Free", "High Fibre", "Non GMO"]'>
+                        <img src="assets/images/white-corn-fufu.jpg" alt="White Corn Fufu" class="product-img" />
+                        <h4>White Corn (Fufu Corn)</h4>
+                        <p>Premium white corn for fufu</p>
                     </div>
-                    <div class="product-card">
+                    <div class="product-card" data-name="Plantain Flour" data-image="assets/images/plantain-flour.jpg" data-description="Gluten-free plantain flour made from premium green plantains. Perfect for baking and cooking." data-features='["100% Natural", "Gluten Free", "High Fibre", "Non GMO"]'>
                         <img src="assets/images/plantain-flour.jpg" alt="Plantain Flour" class="product-img" />
                         <h4>Plantain Flour</h4>
                         <p>Gluten-free plantain flour</p>
                     </div>
-                    <div class="product-card">
-                        <img src="assets/images/cabbage_flour.jpg" alt="Cabbage Flour" class="product-img" />
+                    <div class="product-card" data-name="Cabbage Flour" data-image="assets/images/cabbage-flour.jpg" data-description="Nutrient-rich cabbage flour packed with vitamins and minerals. A healthy alternative for everyday cooking." data-features='["100% Natural", "Low Carb", "High Fibre", "Non GMO"]'>
+                        <img src="assets/images/cabbage-flour.jpg" alt="Cabbage Flour" class="product-img" />
+                        <h4>Cabbage Flour</h4>
                         <p>Nutrient-rich cabbage powder</p>
                     </div>
-                    <div class="product-card">
-                        <img src="assets/images/soya-mix.jpg" alt="Soya Mix" class="product-img" />
+                    <div class="product-card" data-name="Cocoyam Flour" data-image="assets/images/cocoyam-flour.jpg" data-description="Nutrient-rich, gluten-free flour made from premium cocoyam. Perfect for traditional dishes." data-features='["100% Natural", "Gluten Free", "High Fibre", "Non GMO"]'>
+                        <img src="assets/images/cocoyam-flour.jpg" alt="Cocoyam Flour" class="product-img" />
+                        <h4>Cocoyam Flour</h4>
+                        <p>Nutrient-rich, gluten-free flour</p>
+                    </div>
+                    <div class="product-card" data-name="Yam Flour" data-image="assets/images/yam-flour.jpg" data-description="Gluten-free, high fibre flour made from premium yam. Perfect for traditional dishes and baking." data-features='["100% Natural", "Gluten Free", "High Fibre", "Non GMO"]'>
+                        <img src="assets/images/yam-flour.jpg" alt="Yam Flour" class="product-img" />
+                        <h4>Yam Flour</h4>
+                        <p>Gluten-free, high fibre flour</p>
+                    </div>
+                    <div class="product-card" data-name="White Garri" data-image="assets/images/white-garri.jpg" data-description="100% natural white garri made from premium cassava. Gluten-free and rich in fibre." data-features='["100% Natural", "Gluten Free", "High Fibre", "No Preservatives"]'>
+                        <img src="assets/images/white-garri.jpg" alt="White Garri" class="product-img" />
+                        <h4>White Garri</h4>
+                        <p>100% natural, gluten-free</p>
+                    </div>
+                    <div class="product-card" data-name="Yellow Garri" data-image="assets/images/yellow-garri.jpg" data-description="100% natural yellow garri made from premium cassava. Nutrient-dense and rich in fibre." data-features='["100% Natural", "Gluten Free", "High Fibre", "No Preservatives"]'>
+                        <img src="assets/images/yellow-garri.jpg" alt="Yellow Garri" class="product-img" />
+                        <h4>Yellow Garri</h4>
+                        <p>100% natural, nutrient-dense</p>
+                    </div>
+                    <div class="product-card" data-name="Koki Powder" data-image="assets/images/koki-powder.jpg" data-description="High protein, gluten-free powder made from premium koki beans. Perfect for traditional dishes." data-features='["100% Natural", "High Protein", "Gluten Free", "High Fibre"]'>
+                        <img src="assets/images/koki-powder.jpg" alt="Koki Powder" class="product-img" />
+                        <h4>Koki Powder</h4>
+                        <p>High protein, gluten-free powder</p>
+                    </div>
+                    <div class="product-card" data-name="Black Beans Flour" data-image="assets/images/black-beans-flour.jpg" data-description="High protein, high fibre flour made from premium black beans. Perfect for healthy cooking." data-features='["100% Natural", "High Protein", "Gluten Free", "High Fibre"]'>
+                        <img src="assets/images/black-beans-flour.jpg" alt="Black Beans Flour" class="product-img" />
+                        <h4>Black Beans Flour</h4>
+                        <p>High protein, high fibre flour</p>
+                    </div>
+                    <div class="product-card" data-name="Soybeans Powder" data-image="assets/images/soybeans-powder.jpg" data-description="High protein, plant-based powder made from premium soybeans. A healthy addition to your diet." data-features='["100% Natural", "High Protein", "Plant Based", "Non GMO"]'>
+                        <img src="assets/images/soybeans-powder.jpg" alt="Soybeans Powder" class="product-img" />
+                        <h4>Soybeans Powder</h4>
+                        <p>High protein, plant-based powder</p>
+                    </div>
+                    <div class="product-card" data-name="Sweet Potato Flour" data-image="assets/images/sweet-potato-flour.jpg" data-description="Nutrient-rich, gluten-free flour made from premium sweet potatoes. A healthy alternative for everyday cooking." data-features='["100% Natural", "Gluten Free", "High Fibre", "Non GMO"]'>
+                        <img src="assets/images/sweet-potato-flour.jpg" alt="Sweet Potato Flour" class="product-img" />
+                        <h4>Sweet Potato Flour</h4>
+                        <p>Nutrient-rich, gluten-free flour</p>
+                    </div>
+                    <div class="product-card" data-name="Cassava Flour (Water Fufu)" data-image="assets/images/cassava-water-fufu.jpg" data-description="Premium cassava flour specially processed for water fufu. Smooth texture and rich flavor." data-features='["100% Natural", "Gluten Free", "High Fibre", "Non GMO"]'>
+                        <img src="assets/images/cassava-water-fufu.jpg" alt="Cassava Water Fufu" class="product-img" />
+                        <h4>Cassava Flour (Water Fufu)</h4>
+                        <p>Premium water fufu flour</p>
+                    </div>
+                    <div class="product-card" data-name="Cassava Flour (Nkum Nkum)" data-image="assets/images/cassava-nkum-nkum.jpg" data-description="Traditional nkum nkum flour made from premium cassava. A Cameroonian staple." data-features='["100% Natural", "Gluten Free", "High Fibre", "Traditional"]'>
+                        <img src="assets/images/cassava-nkum-nkum.jpg" alt="Cassava Nkum Nkum" class="product-img" />
+                        <h4>Cassava Flour (Nkum Nkum)</h4>
+                        <p>Traditional nkum nkum flour</p>
+                    </div>
+                    <div class="product-card" data-name="Melon Seeds (Egusi)" data-image="assets/images/melon-seeds-egusi.jpg" data-description="Premium melon seeds (egusi) rich in protein. Perfect for traditional soups and stews." data-features='["100% Natural", "High Protein", "Rich in Fibre", "Non GMO"]'>
+                        <img src="assets/images/melon-seeds-egusi.jpg" alt="Melon Seeds Egusi" class="product-img" />
+                        <h4>Melon Seeds (Egusi)</h4>
+                        <p>Rich in protein, perfect for soups</p>
+                    </div>
+                    <div class="product-card" data-name="Soya Mix (Kang-Kang)" data-image="assets/images/soya-mix-kangkang.jpg" data-description="Protein-rich soya blend (Kang-Kang) made from premium soybeans. A traditional Cameroonian favorite." data-features='["100% Natural", "High Protein", "Plant Based", "Non GMO"]'>
+                        <img src="assets/images/soya-mix-kangkang.jpg" alt="Soya Mix" class="product-img" />
                         <h4>Soya Mix (Kang-Kang)</h4>
                         <p>Protein-rich soya blend</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="assets/images/spice-mixes.jpg" alt="Spice Mixes" class="product-img" />
-                        <h4>Pap / Spice Mixes</h4>
-                        <p>Custom spice blends</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Category 3: Dried Spices -->
+            <!-- Category 3: Spices -->
             <div class="category-block">
                 <div class="category-header">
                     <span class="category-icon"><i class="fas fa-pepper-hot" style="color:#D32F2F;"></i></span>
-                    <h3>Dried Spices &amp; Spice Mixes</h3>
+                    <h3>Dried Spices &amp; Seasonings</h3>
                     <a href="https://wa.me/237XXXXXXXXX?text=Hello%20–%20I%20want%20to%20order%20Dried%20Spices" 
                        target="_blank" class="btn-small-wa"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
                 </div>
                 <div class="product-grid">
-                    <div class="product-card">
-                        <img src="assets/images/dried-chilli.jpg" alt="Dried Chilli" class="product-img" />
-                        <h4>Dried Chilli</h4>
-                        <p>Whole &amp; crushed</p>
+                    <div class="product-card" data-name="Dried Chilli (Powder)" data-image="assets/images/dried_chilli.jpg" data-description="Pure dried chilli powder made from premium Cameroonian peppers. Adds heat and flavor to any dish." data-features='["100% Natural", "Pure Powder", "No Additives", "Non GMO"]'>
+                        <img src="assets/images/dried_chilli.jpg" alt="Dried Chilli Powder" class="product-img" />
+                        <h4>Dried Chilli (Powder)</h4>
+                        <p>Pure chilli powder</p>
                     </div>
-                    <div class="product-card">
+                    <div class="product-card" data-name="Garlic Powder" data-image="assets/images/garlic-powder.jpg" data-description="Pure garlic powder made from premium Cameroonian garlic. Adds flavor to any dish." data-features='["100% Natural", "Pure Powder", "No Additives", "Non GMO"]'>
                         <img src="assets/images/garlic-powder.jpg" alt="Garlic Powder" class="product-img" />
                         <h4>Garlic Powder</h4>
                         <p>Pure garlic spice</p>
                     </div>
-                    <div class="product-card">
+                    <div class="product-card" data-name="Onion Powder" data-image="assets/images/onion-powder.jpg" data-description="Pure onion powder made from premium Cameroonian onions. Adds flavor to any dish." data-features='["100% Natural", "Pure Powder", "No Additives", "Non GMO"]'>
+                        <img src="assets/images/onion-powder.jpg" alt="Onion Powder" class="product-img" />
+                        <h4>Onion Powder</h4>
+                        <p>Pure onion powder</p>
+                    </div>
+                    <div class="product-card" data-name="Spice Mixes" data-image="assets/images/spice-mixes.jpg" data-description="Custom spice blends for meat, fish, and stews. Made from premium Cameroonian spices." data-features='["100% Natural", "Custom Blends", "No Additives", "Non GMO"]'>
                         <img src="assets/images/spice-mixes.jpg" alt="Spice Mixes" class="product-img" />
                         <h4>Spice Mixes</h4>
                         <p>Custom blends for meat, fish &amp; stews</p>
@@ -204,29 +458,24 @@
                 </div>
             </div>
 
-            <!-- Category 4: Spice Pastes -->
-            <div class="category-block">
+            <!-- Category 4: Frozen Section -->
+            <div class="category-block" style="border: 2px dashed #f57c00;">
                 <div class="category-header">
-                    <span class="category-icon"><i class="fas fa-jar" style="color:#BF360C;"></i></span>
-                    <h3>Spice Pastes &amp; Sauces</h3>
-                    <a href="https://wa.me/237XXXXXXXXX?text=Hello%20–%20I%20want%20to%20order%20Spice%20Pastes" 
+                    <span class="category-icon"><i class="fas fa-ice-cream" style="color:#2196F3;"></i></span>
+                    <h3>Frozen Foods <span class="coming-soon-badge">Coming Soon</span></h3>
+                    <a href="https://wa.me/237XXXXXXXXX?text=Hello%20–%20I%20want%20to%20order%20Frozen%20products" 
                        target="_blank" class="btn-small-wa"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
                 </div>
                 <div class="product-grid">
-                    <div class="product-card">
-                        <img src="assets/images/chilli-sauce.jpg" alt="Chilli Sauce" class="product-img" />
-                        <h4>Chilli Sauce (Wet)</h4>
-                        <p>Fresh chilli sauce</p>
+                    <div class="product-card" style="opacity:0.6;" data-name="Frozen Vegetables" data-image="" data-description="Premium frozen vegetables. Coming Soon." data-features='["Coming Soon"]'>
+                        <div class="product-img-placeholder"><i class="fas fa-carrot" style="font-size:36px; color:#4CAF50;"></i></div>
+                        <h4>Frozen Vegetables</h4>
+                        <p>Coming Soon</p>
                     </div>
-                    <div class="product-card">
-                        <img src="assets/images/dried_chilli.jpg" alt="Dried Chilli" class="product-img" />
-                        <h4>Chilli Sauce (Dry)</h4>
-                        <p>Dry chilli paste</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="assets/images/tomato-powder.jpg" alt="Tomato Powder" class="product-img" />
-                        <h4>Tomato Powder</h4>
-                        <p>100% tomato powder for cooking</p>
+                    <div class="product-card" style="opacity:0.6;" data-name="Frozen Pre-cooked Items" data-image="" data-description="Premium frozen pre-cooked items. Coming Soon." data-features='["Coming Soon"]'>
+                        <div class="product-img-placeholder"><i class="fas fa-utensils" style="font-size:36px; color:#f57c00;"></i></div>
+                        <h4>Frozen Pre-cooked Items</h4>
+                        <p>Coming Soon</p>
                     </div>
                 </div>
             </div>
@@ -250,9 +499,9 @@
                     <a href="https://wa.me/237XXXXXXXXX?text=Hello%20–%20I%20want%20to%20know%20more%20about%20GreenCity%20Foods" 
                        target="_blank" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Inquire Now</a>
                 </div>
-                <div class="logo">
-                <img src="../assets/images/gcf-logo.png" alt="GreenCity Foods Logo" style="height: 60px;">
-            </div>
+                <div class="about-image">
+                    <img src="assets/images/about-food-processing.jpg" alt="Food Processing" class="about-img" />
+                </div>
             </div>
         </div>
     </section>
@@ -310,19 +559,34 @@
         </div>
     </section>
 
+    <!-- ===== PRODUCT MODAL ===== -->
+    <div id="productModal" class="product-modal">
+        <div class="product-modal-content">
+            <button class="product-modal-close" onclick="closeProductModal()">&times;</button>
+            <div class="product-modal-img-wrapper">
+                <img id="modalProductImage" src="" alt="Product" class="product-modal-img" />
+            </div>
+            <div class="product-modal-body">
+                <h2 id="modalProductTitle">Product Name</h2>
+                <span class="category-tag" id="modalProductCategory">Product</span>
+                <p id="modalProductDescription">Product description goes here.</p>
+                <div class="features" id="modalProductFeatures">
+                    <span>Feature 1</span>
+                    <span>Feature 2</span>
+                    <span>Feature 3</span>
+                </div>
+                <a id="modalWhatsAppLink" href="https://wa.me/237XXXXXXXXX?text=Hello%20–%20I%20want%20to%20order%20this%20product" 
+                   target="_blank" class="btn-wa-modal"><i class="fab fa-whatsapp"></i> Order via WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2026 GreenCity Foods – A Division of GreenCity Enterprises</p>
                 <p><i class="fas fa-seedling" style="color:#81c784;"></i> Sustainably Processed in Cameroon</p>
-            </div>
-                        <div class="footer-logos" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 15px; align-items: center;">
-                <!-- GreenCity Enterprises Logo -->
-                <img src="../assets/images/greencity-enterprises-logo.png" alt="GreenCity Enterprises" style="height: 70px; object-fit: contain;">
-                
-                <!-- GreenCity Briquette Logo -->
-                <img src="../assets/images/greencity-briquette-logo.png" alt="GreenCity Briquette" style="height: 70px; object-fit: contain;">
             </div>
             <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06);">
                 <p style="font-size:0.7rem; color:rgba(255,255,255,0.25);">
@@ -344,8 +608,75 @@
         </div>
     </footer>
 
-    <!-- ===== TMF CONSOLE SIGNATURE ===== -->
+    <!-- ===== MODAL JAVASCRIPT ===== -->
     <script>
+        // ===== OPEN MODAL =====
+        function openProductModal(name, image, description, features, category) {
+            document.getElementById('modalProductTitle').textContent = name;
+            document.getElementById('modalProductImage').src = image;
+            document.getElementById('modalProductDescription').textContent = description;
+            document.getElementById('modalProductCategory').textContent = category || 'Product';
+            
+            // Set features
+            var featuresContainer = document.getElementById('modalProductFeatures');
+            featuresContainer.innerHTML = '';
+            if (features && Array.isArray(features)) {
+                features.forEach(function(feature) {
+                    var span = document.createElement('span');
+                    span.textContent = feature;
+                    featuresContainer.appendChild(span);
+                });
+            }
+            
+            // Set WhatsApp link
+            var waLink = document.getElementById('modalWhatsAppLink');
+            waLink.href = 'https://wa.me/237XXXXXXXXX?text=Hello%20–%20I%20want%20to%20order%20' + encodeURIComponent(name);
+            
+            // Show modal
+            document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // ===== CLOSE MODAL =====
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ===== CLICK EVENTS FOR ALL PRODUCT CARDS =====
+        document.addEventListener('DOMContentLoaded', function() {
+            var cards = document.querySelectorAll('.product-card');
+            cards.forEach(function(card) {
+                card.addEventListener('click', function() {
+                    var name = this.dataset.name;
+                    var image = this.dataset.image;
+                    var description = this.dataset.description;
+                    var features = this.dataset.features;
+                    var category = this.dataset.category || 'Product';
+                    
+                    if (name && image && description) {
+                        var featuresArray = features ? JSON.parse(features) : [];
+                        openProductModal(name, image, description, featuresArray, category);
+                    }
+                });
+            });
+        });
+
+        // ===== CLOSE MODAL ON CLICK OUTSIDE =====
+        document.getElementById('productModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProductModal();
+            }
+        });
+
+        // ===== CLOSE MODAL ON ESC KEY =====
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProductModal();
+            }
+        });
+
+        // ===== TMF CONSOLE SIGNATURE =====
         console.log('%c TMF ', 'background:#2e7d32;color:#fff;font-size:22px;font-weight:800;padding:10px 20px;border-radius:4px 0 0 4px;');
         console.log('%c Think. Make. Flow. ', 'background:#f57c00;color:#fff;font-size:14px;padding:10px 20px;border-radius:0 4px 4px 0;');
         console.log('%c Towa Munwu Fohtung • Lead Web Developer & Designer ', 'background:#1e2a1e;color:#ccc;font-size:12px;padding:8px 20px;');
